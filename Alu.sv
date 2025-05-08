@@ -1,3 +1,4 @@
+`timescale 1ns/1ns
 module Alu(srcA, srcB, opCode, aluResult, zero);
     parameter N = 32;
 

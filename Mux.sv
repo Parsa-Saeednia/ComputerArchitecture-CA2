@@ -1,3 +1,4 @@
+`timescale 1ns/1ns
 module Mux(inp, sel, out);
     parameter N = 4;
     parameter M = 32;
