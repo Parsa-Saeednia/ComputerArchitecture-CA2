@@ -1,5 +1,5 @@
 `timescale 1ns/1ns
-module registerFile(A1, A2, A3, WD3, clk, WE3, RD1, RD2);
+module RegisterFile(A1, A2, A3, WD3, clk, WE3, RD1, RD2);
     parameter S = 32;
     parameter N = 32;
     localparam M = $clog2(N);
