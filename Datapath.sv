@@ -1,3 +1,4 @@
+`timescale 1ns/1ns
 module Datapath(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite, JumpReg, clk, Zero, op, funct3, funct7);
     input PCSrc, MemWrite, ALUSrc, RegWrite, JumpReg, clk, rst;
     input [1:0] ResultSrc;
