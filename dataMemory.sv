@@ -12,6 +12,7 @@ module DataMemory(WE, A, WD, RD, clk);
 
     initial $readmemb("Data.mem", memory);
 
+
     always @(*) begin
         for (integer i = 0; i < 4; i = i + 1) begin
             RD[(i * 8) + 7 : (i * 8)] = memory[address + i]; 
