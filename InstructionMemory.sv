@@ -1,12 +1,11 @@
 `timescale 1ns/1ns
 module InstructionMemory(pc, instr);
-    parameter N = 32;
     parameter MEM_SIZE = 256;
 
-    input [N-1:0] pc;
-    output reg [N-1:0] instr;
+    input [31:0] pc;
+    output reg [31:0] instr;
 
-    reg [N-1:0] mem [0:MEM_SIZE-1];
+    reg [31:0] mem [0:MEM_SIZE-1];
 
     initial begin
         $readmemh("program.hex", mem);

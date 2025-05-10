@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
 module Extend(imm, immSrc, immExt);
     input [31:7] imm;
-    input [1:0] immSrc;
+    input [2:0] immSrc;
     output reg [31:0] immExt;
 
     always @(*) begin
