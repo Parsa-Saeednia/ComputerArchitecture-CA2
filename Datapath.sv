@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
-module Datapath(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite, JumpReg, clk, Zero, op, funct3, funct7);
-    input PCSrc, MemWrite, ALUSrc, RegWrite, JumpReg, clk, rst;
-    input [1:0] ResultSrc;
+module Datapath(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite, clk, Zero, op, funct3, funct7);
+    input MemWrite, ALUSrc, RegWrite, clk, rst;
+    input [1:0]  PCSrc, ResultSrc;
     input [2:0] ImmSrc, ALUControl;
 
     output Zero;
@@ -10,7 +10,7 @@ module Datapath(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite
 
     wire [31:0] PCNext, PC, Instr, ImmExt, Result, SrcA, WriteData, SrcB, ALUResult, ReadData, PCPlus4, PCTarget, JumpImm;
     wire [31:0] Mux1_inp [0:1];
-    wire [31:0] Mux3_inp [0:1];
+    wire [31:0] Mux3_inp [0:2];
     wire [31:0] Mux4_inp [0:1];
     wire [31:0] Mux2_inp [0:3];
 
@@ -33,9 +33,9 @@ module Datapath(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite
 
     Adder #(32) PCPlus4_Adder(.a(PC), .b(3'b100), .out(PCPlus4));
 
-    Mux #(2, 32) Mux3(.inp(Mux3_inp), .sel(PCSrc), .out(PCNext));
+    Mux #(3, 32) Mux3(.inp(Mux3_inp), .sel(PCSrc), .out(PCNext));
 
-    Mux #(2, 32) Mux4(.inp(Mux4_inp), .sel(JumpReg), .out(JumpImm));
+    // Mux #(2, 32) Mux4(.inp(Mux4_inp), .sel(JumpReg), .out(JumpImm));
 
     Adder #(32) PCTarget_Adder(.a(PC), .b(JumpImm), .out(PCTarget));
 
