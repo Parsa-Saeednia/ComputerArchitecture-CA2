@@ -1,5 +1,5 @@
-module Riscv(clk);
-    input clk;
+module Riscv(clk, rst);
+    input clk, rst;
     
     wire [1:0] ResultSrc, PCSrc;
     wire [2:0] funct3, ALUControl, immSrc;

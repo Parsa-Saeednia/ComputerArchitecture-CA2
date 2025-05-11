@@ -1,5 +1,7 @@
 *.pdf
 *.wlf
 *.tmp
+*.cr.mti
+*.mpf
 transcript
 /work

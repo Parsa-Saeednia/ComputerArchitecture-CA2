@@ -23,7 +23,7 @@ module DataMemory(WE, A, WD, RD, clk);
 
     always @(posedge clk) begin
         if (WE) begin
-            memory[address]     <= WD[7:0];
+            memory[address] <= WD[7:0];
             memory[address + 1] <= WD[15:8];
             memory[address + 2] <= WD[23:16];
             memory[address + 3] <= WD[31:24];

@@ -1,3 +1,4 @@
+`timescale 1ns/1ns
 module Riscv_tb();
 
 reg clk;
@@ -19,7 +20,7 @@ initial begin
     rst = 0;
 end
 
-Riscv dut(.clk(clk));
+Riscv dut(.clk(clk), .rst(rst));
 
 initial begin
     $monitor("Time: %0t | clk: %b | rst: %b | zero: %b | PCSrc: %b | ResultSrc: %b | MemWrite: %b | ALUSrc: %b | ALUControl: %b | immSrc: %b | RegWrite: %b",

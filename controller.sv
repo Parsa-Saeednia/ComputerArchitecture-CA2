@@ -15,7 +15,7 @@ module Controller(zero, opcode, funct3, funct7, PCSrc, ResultSrc, MemWrite, ALUC
 
     wire [1:0] ALUOp;
 
-    RiscVcontroller riscv(funct3, opcode, zero,  MemWrite,  RegWrite, ALUSrc, PCSrc,  ResultSrc,  AluOp, ImmSrc);
+    RiscvController riscv(funct3, opcode, zero,  MemWrite,  RegWrite, ALUSrc, PCSrc,  ResultSrc,  AluOp, ImmSrc);
     ALU_Controller aluc(AluOp, ALUControl, func3, func7);
     
 
