@@ -3,5 +3,7 @@
 *.tmp
 *.cr.mti
 *.mpf
+*.txt
+*.py
 transcript
 /work

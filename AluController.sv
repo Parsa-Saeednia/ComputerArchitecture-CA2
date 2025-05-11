@@ -13,7 +13,7 @@ module ALU_Controller(AluOp, ALUControl, func3, func7);
     output reg [2:0] ALUControl;
     input [2:0] func3;
     input [1:0] AluOp;
-    input func7;
+    input [6:0] func7;
 
     always @(func3 or AluOp or func7) begin
         case (AluOp)
@@ -22,8 +22,8 @@ module ALU_Controller(AluOp, ALUControl, func3, func7);
             i_t   : ALUControl =  (func3 == 3'b000) ? add :
                         (func3 == 3'b110) ? or_ :
                         (func3 == 3'b010) ? slt : add;
-            r_t   : ALUControl = (func3 == 3'b000 & ~func7) ? add :
-                        (func3 == 3'b000 & func7)  ? sub :
+            r_t   : ALUControl = (func3 == 3'b000 & (func7 == 0)) ? add :
+                        (func3 == 3'b000 & func7 != 0 )  ? sub :
                         (func3 == 3'b111) ? and_ :
                         (func3 == 3'b110) ? or_ :
                         (func3 == 3'b010) ? slt : add;

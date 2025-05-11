@@ -15,13 +15,13 @@ module Datapath(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite
     wire [31:0] Mux2_inp [0:3];
 
 
-    Register #(32) PC_Reg(.clk(clk), .rst(1'b0), .inp(PCNext), .out(PC));
+    Register #(32) PC_Reg(.clk(clk), .rst(rst), .inp(PCNext), .out(PC));
 
     InstructionMemory #(256) InstructionMemoryBlock(.pc(PC), .instr(Instr));
 
     Extend Extend_Block(.imm(Instr[31:7]), .immSrc(ImmSrc), .immExt(ImmExt));
 
-    RegisterFile #(32, 32) RegisterFile_Block(.clk(clk), .A1(Instr[19:15]), .A2(Instr[24:20]), .A3(Instr[11:7]), .WD3(Result), .WE3(RegWrite), .RD1(Readed1), .RD2(WriteData));
+    RegisterFile #(32, 32) RegisterFile_Block(.clk(clk), .A1(Instr[19:15]), .A2(Instr[24:20]), .A3(Instr[11:7]), .WD3(Result), .WE3(RegWrite), .RD1(SrcA), .RD2(WriteData));
 
     Mux #(2, 32) Mux1(.inp(Mux1_inp), .sel(ALUSrc), .out(SrcB));
 
@@ -31,13 +31,13 @@ module Datapath(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite
 
     Mux #(4, 32) Mux2(.inp(Mux2_inp), .sel(ResultSrc), .out(Result));
 
-    Adder #(32) PCPlus4_Adder(.a(PC), .b(3'b100), .out(PCPlus4));
+    Adder #(32) PCPlus4_Adder(.a(PC), .b(32'b100), .out(PCPlus4));
 
     Mux #(3, 32) Mux3(.inp(Mux3_inp), .sel(PCSrc), .out(PCNext));
 
     // Mux #(2, 32) Mux4(.inp(Mux4_inp), .sel(JumpReg), .out(JumpImm));
 
-    Adder #(32) PCTarget_Adder(.a(PC), .b(JumpImm), .out(PCTarget));
+    Adder #(32) PCTarget_Adder(.a(PC), .b(ImmExt), .out(PCTarget));
 
 
     assign Mux1_inp[0] = WriteData;
@@ -50,9 +50,10 @@ module Datapath(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite
 
     assign Mux3_inp[0] = PCPlus4;
     assign Mux3_inp[1] = PCTarget;
+    assign Mux3_inp[2] = ALUResult;
 
-    assign Mux4_inp[0] = SrcA;
-    assign Mux4_inp[1] = ImmExt;
+    // assign Mux4_inp[0] = SrcA;
+    // assign Mux4_inp[1] = ImmExt;
 
     assign op = Instr[6:0];
     assign funct3 = Instr[14:12];

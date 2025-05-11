@@ -9,16 +9,17 @@ module RegisterFile(A1, A2, A3, WD3, clk, WE3, RD1, RD2);
     output [N-1:0]  RD1, RD2;
 
     reg [N-1:0] register [0:S-1];
+    initial begin
+        register[0] = 0;
+    end
 
     always @(posedge clk)begin 
-        if (WE3) register[A3] <= WD3;
+        if (WE3 & (A3 != 0)) register[A3] <= WD3;
     end
 
     assign RD1 = register[A1];
     assign RD2 = register[A2];
 
-    always @(*)begin
-        register[0] = 0;
-    end
+    
 
 endmodule
