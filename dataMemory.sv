@@ -5,7 +5,8 @@ module DataMemory(WE, A, WD, RD, clk);
     output reg [31:0] RD;
 
     reg [7:0] memory [0:(2**16)-1]; 
-    reg [31:0] address;
+    wire [31:0] address;
+    integer i;
 
     assign address[31:2] = A[31:2];
     assign address[1:0] = 2'b00;
@@ -14,14 +15,14 @@ module DataMemory(WE, A, WD, RD, clk);
 
 
     always @(*) begin
-        for (integer i = 0; i < 4; i = i + 1) begin
+        for (i = 0; i < 4; i = i + 1) begin
             RD[(i * 8) + 7 : (i * 8)] = memory[address + i]; 
         end
     end
 
     always @(posedge clk) begin
         if (WE) begin
-            for (integer i = 0; i < 4; i = i + 1) begin
+            for (i = 0; i < 4; i = i + 1) begin
                 memory[address + i] <= WD[(i * 8) + 7 : (i * 8)];
             end
         end

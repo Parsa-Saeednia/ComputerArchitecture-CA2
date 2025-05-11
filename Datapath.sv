@@ -1,5 +1,5 @@
 `timescale 1ns/1ns
-module Datapath(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite, clk, Zero, op, funct3, funct7);
+module Datapath(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite, clk, rst, Zero, op, funct3, funct7);
     input MemWrite, ALUSrc, RegWrite, clk, rst;
     input [1:0]  PCSrc, ResultSrc;
     input [2:0] ImmSrc, ALUControl;
@@ -21,7 +21,7 @@ module Datapath(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite
 
     Extend Extend_Block(.imm(Instr[31:7]), .immSrc(ImmSrc), .immExt(ImmExt));
 
-    RegisterFile #(32, 32) RegisterFile_Block(.clk(clk), .A1(Instr[19:15]), .A2(Instr[24:20], .A3(Instr[11:7]), .WD3(Result)), .WE3(RegWrite), .RD1(Readed1), RD2(WriteData));
+    RegisterFile #(32, 32) RegisterFile_Block(.clk(clk), .A1(Instr[19:15]), .A2(Instr[24:20]), .A3(Instr[11:7]), .WD3(Result), .WE3(RegWrite), .RD1(Readed1), .RD2(WriteData));
 
     Mux #(2, 32) Mux1(.inp(Mux1_inp), .sel(ALUSrc), .out(SrcB));
 

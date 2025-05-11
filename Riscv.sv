@@ -6,6 +6,6 @@ module Riscv(clk);
     wire [6:0] op; 
     wire zero, ALUSrc, funct7, MemWrite, RegWrite;
 
-    Datapath dp(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite, clk, Zero, op, funct3, funct7);
+    Datapath dp(PCSrc, ResultSrc, MemWrite, ALUSrc, ALUControl, ImmSrc, RegWrite, clk, rst, Zero, op, funct3, funct7);
     Controller ctrl(zero, op, funct3, funct7, PCSrc, ResultSrc, MemWrite, ALUControl, ALUSrc, ImmSrc, RegWrite);
 endmodule

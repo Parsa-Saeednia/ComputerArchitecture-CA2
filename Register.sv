@@ -2,7 +2,7 @@
 module Register(clk, rst, inp, out);
     parameter N = 32;
     
-    input clk;
+    input clk, rst;
     input [N - 1:0] inp;
     output reg [N - 1:0] out;
 
