@@ -15,17 +15,18 @@ module DataMemory(WE, A, WD, RD, clk);
 
 
     always @(*) begin
-        for (i = 0; i < 4; i = i + 1) begin
-            RD[(i * 8) + 7 : (i * 8)] = memory[address + i]; 
-        end
+        RD[7:0]   = memory[address];
+        RD[15:8]  = memory[address + 1];
+        RD[23:16] = memory[address + 2];
+        RD[31:24] = memory[address + 3];
     end
 
     always @(posedge clk) begin
         if (WE) begin
-            for (i = 0; i < 4; i = i + 1) begin
-                memory[address + i] <= WD[(i * 8) + 7 : (i * 8)];
-            end
+            memory[address]     <= WD[7:0];
+            memory[address + 1] <= WD[15:8];
+            memory[address + 2] <= WD[23:16];
+            memory[address + 3] <= WD[31:24];
         end
     end
-
 endmodule
