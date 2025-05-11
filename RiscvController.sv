@@ -1,5 +1,5 @@
 `timescale 1ns/1ns
-module RiscVcontroller(funct3, opcode, zero,  MemWrite,  RegWrite, ALUSrc, PCSrc,  ResultSrc,  AluOp, ImmSrc);
+module RiscvController(funct3, opcode, zero,  MemWrite,  RegWrite, ALUSrc, PCSrc,  ResultSrc,  AluOp, ImmSrc);
 
     input wire [2:0] funct3;
     input wire [6:0] opcode;
